@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM alpine:3.18
 
 ARG ZBX_SOURCES=https://git.zabbix.com/scm/zbx/zabbix.git
 ARG ZBX_BRANCH=release/6.0
@@ -80,14 +80,6 @@ RUN cd /tmp/ && \
     cat database/mysql/schema.sql > database/mysql/create.sql && \
     gzip -c database/mysql/create.sql > database/mysql/create_proxy.sql.gz && \
     rm -rf database/mysql/create.sql && \
-    mkdir /tmp/fonts/ && \
-    curl --silent -L "https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip" -o /tmp/fonts/NotoSansCJKjp-hinted.zip && \
-    unzip /tmp/fonts/NotoSansCJKjp-hinted.zip -d /tmp/fonts/ && \
-    cp /tmp/fonts/NotoSansCJKjp-Regular.otf /tmp/zabbix-branch/ui/assets/fonts/NotoSansCJKjp-Regular.ttf && \
-    cp /tmp/fonts/LICENSE_OFL.txt /tmp/zabbix-branch/ui/assets/fonts/ && \
-    rm -f /tmp/zabbix-branch/ui/assets/fonts/DejaVuSans.ttf && \
-    sed -i -r "s/(define\(.*_FONT_NAME.*)DejaVuSans/\1NotoSansCJKjp-Regular/" /tmp/zabbix-branch/ui/include/defines.inc.php && \
-    rm -rf /tmp/fonts/ && \
     strip /tmp/zabbix-branch/src/zabbix_agent/zabbix_agentd && \
     strip /tmp/zabbix-branch/src/zabbix_server/zabbix_server && \
     strip /tmp/zabbix-branch/src/zabbix_proxy/zabbix_proxy && \
