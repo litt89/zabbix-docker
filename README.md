@@ -10,4 +10,4 @@ change ZBX_BRANCH to branch you need
 
 For ready-to-use project use docker-compose file. Change **ZBX_BRANCH** variable in the file and use **docker compose up -d**
 
-in case if you want update already created container, after changing **ZBX_BRANCH** use **docker-compose up --build**
+in case if you want update already created container, after changing **ZBX_BRANCH** use **docker-compose up --build -d**
