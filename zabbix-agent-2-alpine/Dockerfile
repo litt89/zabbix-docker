@@ -3,6 +3,9 @@ FROM alpine:3.18
 ARG ZBX_SOURCES=https://git.zabbix.com/scm/zbx/zabbix.git
 ARG ZBX_BRANCH=release/6.0
 
+ENV MONGODB_PLUGIN_SOURCES=https://git.zabbix.com/scm/ap/mongodb.git MONGODB_PLUGIN_VERSION=${ZBX_VERSION} \
+    POSTGRESQL_PLUGIN_SOURCES=https://git.zabbix.com/scm/ap/postgresql.git POSTGRESQL_PLUGIN_VERSION=${ZBX_VERSION}
+
 RUN apk add \
     --no-cache \
     --clean-protected \
@@ -53,6 +56,16 @@ RUN cd /tmp/ && \
             --silent && \
     make -j"$(nproc)" -s && \
     strip /tmp/zabbix-branch/src/go/bin/zabbix_agent2 && \
+    cd /tmp/ && \
+    git -c advice.detachedHead=false clone ${MONGODB_PLUGIN_SOURCES} --branch ${ZBX_BRANCH} --depth 1 --single-branch /tmp/mongodb_plugin && \
+    cd /tmp/mongodb_plugin && \
+    make && \
+    strip /tmp/mongodb_plugin/zabbix-agent2-plugin-mongodb && \
+    cd /tmp/ && \
+    git -c advice.detachedHead=false clone ${POSTGRESQL_PLUGIN_SOURCES} --branch ${ZBX_BRANCH} --depth 1 --single-branch /tmp/postgresql_plugin && \
+    cd /tmp/postgresql_plugin && \
+    make && \
+    strip /tmp/postgresql_plugin/zabbix-agent2-plugin-postgresql && \
     rm -rf $(go env GOCACHE)
 
 STOPSIGNAL SIGTERM
