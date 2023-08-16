@@ -60,7 +60,7 @@ STOPSIGNAL SIGTERM
 RUN cp /tmp/zabbix-branch/src/go/bin/zabbix_agent2 /usr/sbin/zabbix_agent2
 RUN cp /tmp/zabbix-branch/src/zabbix_get/zabbix_get /usr/bin/zabbix_get
 RUN cp /tmp/zabbix-branch/src/zabbix_sender/zabbix_sender /usr/bin/zabbix_sender
-RUN cp /tmp/zabbix-branch/src/go/conf/zabbix_agent2.conf /etc/zabbix/zabbix_agent2.conf
+RUN mkdir /etc/zabbix && cp /tmp/zabbix-branch/src/go/conf/zabbix_agent2.conf /etc/zabbix/zabbix_agent2.conf
 RUN cp /tmp/zabbix-branch/src/go/conf/zabbix_agent2.d/plugins.d /etc/zabbix/zabbix_agent2.d/plugins.d
 RUN cp /tmp/mongodb_plugin/mongodb.conf /etc/zabbix/zabbix_agent2.d/plugins.d/mongodb.conf
 RUN cp /tmp/postgresql_plugin/postgresql.conf /etc/zabbix/zabbix_agent2.d/plugins.d/postgresql.conf
