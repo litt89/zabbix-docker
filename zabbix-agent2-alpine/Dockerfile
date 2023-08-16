@@ -4,7 +4,8 @@ ARG ZBX_SOURCES=https://git.zabbix.com/scm/zbx/zabbix.git
 ARG ZBX_BRANCH=release/6.0
 
 ENV MONGODB_PLUGIN_SOURCES=https://git.zabbix.com/scm/ap/mongodb.git \
-    POSTGRESQL_PLUGIN_SOURCES=https://git.zabbix.com/scm/ap/postgresql.git
+    POSTGRESQL_PLUGIN_SOURCES=https://git.zabbix.com/scm/ap/postgresql.git \
+    GOPROXY=https://goproxy.cn
 
 RUN apk add \
     --no-cache \
@@ -123,6 +124,8 @@ EXPOSE 10050/TCP 31999/TCP
 WORKDIR /var/lib/zabbix
 
 COPY ["docker-entrypoint.sh", "/usr/bin/"]
+
+RUN ["chmod", "+x", "/usr/bin/docker-entrypoint.sh"]
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/docker-entrypoint.sh"]
 
