@@ -47,6 +47,7 @@ RUN cd /tmp/ && \
     export CFLAGS="$CFLAGS -D_FORTIFY_SOURCE=2 -fexceptions -O2 -pipe" && \
     ./configure \
             --enable-agent2 \
+            --with-libpcre2 \
             --silent && \
     strip /tmp/zabbix-branch/src/go/bin/zabbix_agent2 && \
     rm -rf $(go env GOCACHE)
