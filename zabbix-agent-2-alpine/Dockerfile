@@ -49,6 +49,7 @@ RUN cd /tmp/ && \
             --enable-agent2 \
             --with-libpcre2 \
             --silent && \
+    make -j"$(nproc)" -s && \
     strip /tmp/zabbix-branch/src/go/bin/zabbix_agent2 && \
     rm -rf $(go env GOCACHE)
 
