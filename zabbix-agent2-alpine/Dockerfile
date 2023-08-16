@@ -75,7 +75,7 @@ RUN cp /tmp/zabbix-branch/src/go/bin/zabbix_agent2 /usr/sbin/zabbix_agent2
 RUN cp /tmp/zabbix-branch/src/zabbix_get/zabbix_get /usr/bin/zabbix_get
 RUN cp /tmp/zabbix-branch/src/zabbix_sender/zabbix_sender /usr/bin/zabbix_sender
 RUN mkdir /etc/zabbix && cp /tmp/zabbix-branch/src/go/conf/zabbix_agent2.conf /etc/zabbix/zabbix_agent2.conf
-RUN mkdir /etc/zabbix/zabbix_agent2.d && mkdir /etc/zabbix/zabbix_agent2.d/plugins.d && cp -r /tmp/zabbix-branch/src/go/conf/zabbix_agent2.d/plugins.d /etc/zabbix/zabbix_agent2.d/plugins.d
+RUN mkdir /etc/zabbix/zabbix_agent2.d && mkdir /etc/zabbix/zabbix_agent2.d/plugins.d && cp -a /tmp/zabbix-branch/src/go/conf/zabbix_agent2.d/plugins.d/. /etc/zabbix/zabbix_agent2.d/plugins.d
 RUN cp /tmp/mongodb_plugin/mongodb.conf /etc/zabbix/zabbix_agent2.d/plugins.d/mongodb.conf
 RUN cp /tmp/postgresql_plugin/postgresql.conf /etc/zabbix/zabbix_agent2.d/plugins.d/postgresql.conf
 RUN mkdir /usr/sbin/zabbix-agent2-plugin && mkdir /usr/sbin/zabbix-agent2-plugin/zabbix-agent2-plugin-mongodb && cp -r /tmp/mongodb_plugin/zabbix-agent2-plugin-mongodb /usr/sbin/zabbix-agent2-plugin/zabbix-agent2-plugin-mongodb
