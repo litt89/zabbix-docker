@@ -46,7 +46,9 @@ RUN cd /tmp/ && \
     export CFLAGS="-fPIC -pie -Wl,-z,relro,-z,now,-z,defs" && \
     export CFLAGS="$CFLAGS -D_FORTIFY_SOURCE=2 -fexceptions -O2 -pipe" && \
     ./configure \
+            --enable-agent \
             --enable-agent2 \
+            --with-libcurl \
             --with-libpcre2 \
             --silent && \
     make -j"$(nproc)" -s && \
