@@ -117,6 +117,7 @@ RUN set -eux && \
     chown --quiet -R zabbix:root /etc/zabbix/ /var/lib/zabbix/ /usr/sbin/zabbix-agent2-plugin/ && \
     chgrp -R 0 /etc/zabbix/ /var/lib/zabbix/ /usr/sbin/zabbix-agent2-plugin/ && \
     chmod -R g=u /etc/zabbix/ /var/lib/zabbix/ /usr/sbin/zabbix-agent2-plugin/ && \
+    chmod -R +x /usr/sbin/zabbix-agent2-plugin/ && \
     rm -rf /var/cache/apk/*
 
 EXPOSE 10050/TCP 31999/TCP
@@ -132,3 +133,5 @@ ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/docker-entrypoint.sh"]
 USER 1997
 
 CMD ["/usr/sbin/zabbix_agent2", "--foreground", "-c", "/etc/zabbix/zabbix_agent2.conf"]
+
+/usr/sbin/zabbix_agent2 --foreground -c /etc/zabbix/zabbix_agent2.conf
