@@ -187,6 +187,8 @@ VOLUME ["/var/lib/zabbix/snmptraps", "/var/lib/zabbix/export"]
 
 COPY ["docker-entrypoint.sh", "/usr/bin/"]
 
+RUN ["chmod", "+x", "/usr/bin/docker-entrypoint.sh"]
+
 ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 
 USER 1997
