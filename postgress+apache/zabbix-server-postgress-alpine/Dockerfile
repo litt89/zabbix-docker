@@ -71,7 +71,6 @@ RUN set -eux && \
     git -c advice.detachedHead=false clone ${ZBX_SOURCES} --branch ${ZBX_BRANCH} --depth 1 --single-branch /tmp/zabbix; \
     fi && \
     cd /tmp/zabbix && \
-    patch -p1 < /tmp/chromedp_no_sandbox.patch && \
     zabbix_revision=`git rev-parse --short HEAD` && \
     sed -i "s/{ZABBIX_REVISION}/$zabbix_revision/g" include/version.h && \
     sed -i "s/{ZABBIX_REVISION}/$zabbix_revision/g" src/go/pkg/version/version.go && \
