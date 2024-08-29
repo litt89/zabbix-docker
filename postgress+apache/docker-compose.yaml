@@ -195,11 +195,7 @@ networks:
       - subnet: 172.21.239.0/24
 
 secrets:
-  MYSQL_USER:
-    file: ./env_vars/.MYSQL_USER
-  MYSQL_PASSWORD:
-    file: ./env_vars/.MYSQL_PASSWORD
-  MYSQL_ROOT_USER:
-    file: ./env_vars/.MYSQL_ROOT_USER
-  MYSQL_ROOT_PASSWORD:
-    file: ./env_vars/.MYSQL_ROOT_PASSWORD
+  POSTGRES_USER:
+    file: ./env_vars/.POSTGRES_USER
+  POSTGRES_PASSWORD:
+    file: ./env_vars/.POSTGRES_PASSWORD
