@@ -2,7 +2,7 @@ services:
  zabbix-server:
   image: zabbix-server-postgress-alpine-${ZBX_VER}
   build: 
-    context: ./zabbix-server-postgress-alpine-${ZBX_VER}
+    context: ./zabbix-server-postgress-alpine
     args: 
       ZBX_BRANCH: ${ZBX_BRANCH}
   ports:
