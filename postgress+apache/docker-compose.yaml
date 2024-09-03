@@ -1,9 +1,9 @@
 services:
   zabbix-server:
-    image: zabbix-server-postgress-alpine-${ZBX_VER}
+    image: zabbix-server-postgres-alpine-${ZBX_VER}
     restart: alwayse
     build:
-      context: ./zabbix-server-postgress-alpine
+      context: ./zabbix-server-postgres-alpine
       args:
         ZBX_BRANCH: ${ZBX_BRANCH}
     ports:
@@ -39,14 +39,14 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
     depends_on:
-      - postgress-server
+      - postgres-server
     networks:
       zbx_net_backend:
         aliases:
           - zabbix-server
-          - zabbix-server-postgress
-          - zabbix-server-alpine-postgress
-          - zabbix-server-postgress-alpine
+          - zabbix-server-postgres
+          - zabbix-server-alpine-postgres
+          - zabbix-server-postgres-alpine
       zbx_net_frontend:
     stop_grace_period: 30s
     sysctls:
@@ -54,11 +54,11 @@ services:
       - net.ipv4.conf.all.accept_redirects=0
       - net.ipv4.conf.all.secure_redirects=0
       - net.ipv4.conf.all.send_redirects=0
-  zabbix-web-apache-postgress:
-    image: zabbix-web-apache-postgress-alpine-${ZBX_VER}
+  zabbix-web-apache-postgres:
+    image: zabbix-web-apache-postgres-alpine-${ZBX_VER}
     restart: alwayse
     build:
-      context: ./zabbix-web-apache-postgress-alpine
+      context: ./zabbix-web-apache-postgres-alpine
       args:
         ZBX_BRANCH: ${ZBX_BRANCH}
     ports:
@@ -67,7 +67,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ./zbx_env/etc/ssl/postgress:/etc/ssl/postgress:ro
+      - ./zbx_env/etc/ssl/postgres:/etc/ssl/postgres:ro
       - ./zbx_env/usr/share/zabbix/modules/:/usr/share/zabbix/modules/:ro
     deploy:
       resources:
@@ -84,7 +84,7 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
     depends_on:
-      - postgress-server
+      - postgres-server
       - zabbix-server
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/ping"]
@@ -95,9 +95,9 @@ services:
     networks:
       zbx_net_backend:
         aliases:
-          - zabbix-web-apache-postgress
-          - zabbix-web-apache-alpine-postgress
-          - zabbix-web-apache-postgress-alpine
+          - zabbix-web-apache-postgres
+          - zabbix-web-apache-alpine-postgres
+          - zabbix-web-apache-postgres-alpine
       zbx_net_frontend:
     stop_grace_period: 10s
     sysctls:
