@@ -1,6 +1,7 @@
 services:
   zabbix-server:
     image: zabbix-server-postgress-alpine-${ZBX_VER}
+    restart: alwayse
     build:
       context: ./zabbix-server-postgress-alpine
       args:
@@ -37,8 +38,8 @@ services:
     secrets:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
-    # depends_on:
-    #  - postgress-server
+    depends_on:
+      - postgress-server
     networks:
       zbx_net_backend:
         aliases:
@@ -55,6 +56,7 @@ services:
       - net.ipv4.conf.all.send_redirects=0
   zabbix-web-apache-postgress:
     image: zabbix-web-apache-postgress-alpine-${ZBX_VER}
+    restart: alwayse
     build:
       context: ./zabbix-web-apache-postgress-alpine
       args:
@@ -82,7 +84,7 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
     depends_on:
-      # - postgress-server
+      - postgress-server
       - zabbix-server
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/ping"]
@@ -104,7 +106,7 @@ services:
   postgres-server:
     image: "postgres:16-alpine"
     #  command: -c ssl=on -c ssl_cert_file=/run/secrets/server-cert.pem -c ssl_key_file=/run/secrets/server-key.pem -c ssl_ca_file=/run/secrets/root-ca.pem
-    restart: "${RESTART_POLICY}"
+    restart: alwayse
     attach: false
     volumes:
       - ./zbx_env/var/lib/postgresql/data:/var/lib/postgresql/data:rw
@@ -118,7 +120,7 @@ services:
       - POSTGRES_PASSWORD
     stop_grace_period: 1m
     networks:
-      database:
+      zbx_net_backend:
         aliases:
           - postgres-server
 
