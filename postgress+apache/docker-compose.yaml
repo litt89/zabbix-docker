@@ -1,7 +1,7 @@
 services:
   zabbix-server:
     image: zabbix-server-postgres-alpine-${ZBX_VER}
-    restart: alwayse
+    restart: always
     build:
       context: ./zabbix-server-postgres-alpine
       args:
@@ -56,7 +56,7 @@ services:
       - net.ipv4.conf.all.send_redirects=0
   zabbix-web-apache-postgres:
     image: zabbix-web-apache-postgres-alpine-${ZBX_VER}
-    restart: alwayse
+    restart: always
     build:
       context: ./zabbix-web-apache-postgres-alpine
       args:
@@ -106,7 +106,7 @@ services:
   postgres-server:
     image: "postgres:16-alpine"
     #  command: -c ssl=on -c ssl_cert_file=/run/secrets/server-cert.pem -c ssl_key_file=/run/secrets/server-key.pem -c ssl_ca_file=/run/secrets/root-ca.pem
-    restart: alwayse
+    restart: always
     attach: false
     volumes:
       - ./zbx_env/var/lib/postgresql/data:/var/lib/postgresql/data:rw
