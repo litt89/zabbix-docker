@@ -95,8 +95,6 @@ RUN set -eux && \
     cat database/postgresql/images.sql >> database/postgresql/create.sql && \
     cat database/postgresql/data.sql >> database/postgresql/create.sql && \
     gzip -c database/postgresql/create.sql > /tmp/zabbix-output/server/database/postgresql/create.sql.gz && \
-    mkdir -p /usr/share/doc/zabbix-server-postgresql/ && \
-    cp /tmp/zabbix-output/server/database/postgresql/create.sql.gz /usr/share/doc/zabbix-server-postgresql/create.sql.gz && \
     rm -rf database/postgresql/create.sql  && \
     cp -R /tmp/zabbix/database/postgresql/timescaledb/schema.sql /tmp/zabbix-output/server/database/postgresql/timescaledb.sql && \
     cp -R /tmp/zabbix/database/postgresql/timescaledb/option-patches/with-compression/*.sql /tmp/zabbix-output/server/database/postgresql/option-patches/with-compression/ && \
@@ -111,6 +109,13 @@ RUN set -eux && \
     cp /tmp/zabbix/src/zabbix_server/zabbix_server /tmp/zabbix-output/server/sbin/ && \
     cp /tmp/zabbix/conf/zabbix_server.conf /tmp/zabbix-output/server/conf/ && \
     make -s distclean
+
+
+RUN mkdir -p /usr/share/doc/zabbix-server-postgresql/ && \
+    cp /tmp/zabbix-output/server/database/postgresql/create.sql.gz /usr/share/doc/zabbix-server-postgresql/create.sql.gz && \
+    cp -r /tmp/zabbix-output/general/bin /usr/bin && \
+    cp /tmp/zabbix-output/server/sbin/zabbix_server /usr/sbin/zabbix_server && \
+    cp -r /tmp/zabbix-output/server/conf /etc/zabbix
 
 RUN set -eux && \
     INSTALL_PKGS="bash \
