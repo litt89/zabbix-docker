@@ -114,7 +114,7 @@ services:
       - ./zbx_env/.ZBX_DB_CERT_FILE:/run/secrets/server-cert.pem:ro
       - ./zbx_env/.ZBX_DB_KEY_FILE:/run/secrets/server-key.pem:ro
     env_file:
-      - ./zbx_env/.env_db_pgsql
+      - ./env_vars/.env_db_pgsql
     secrets:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
