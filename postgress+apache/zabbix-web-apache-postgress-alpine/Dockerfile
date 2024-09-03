@@ -109,6 +109,7 @@ RUN set -eux && \
     strip /tmp/zabbix/src/zabbix_server/zabbix_server && \
     cp /tmp/zabbix/src/zabbix_server/zabbix_server /tmp/zabbix-output/server/sbin/ && \
     cp /tmp/zabbix/conf/zabbix_server.conf /tmp/zabbix-output/server/conf/ && \
+    cp /tmp/zabbix/ui /usr/share/zabbix && \
     make -s distclean
 
 STOPSIGNAL SIGTERM
