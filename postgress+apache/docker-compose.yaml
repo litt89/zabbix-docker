@@ -63,7 +63,7 @@ services:
         ZBX_BRANCH: ${ZBX_BRANCH}
     ports:
       - "8011:8080"
-      - "443:8443"
+      # - "443:8443"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
