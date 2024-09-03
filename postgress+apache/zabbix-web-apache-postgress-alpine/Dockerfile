@@ -196,6 +196,8 @@ WORKDIR /usr/share/zabbix
 
 COPY ["docker-entrypoint.sh", "/usr/bin/"]
 
+RUN ["chmod", "+x", "/usr/bin/docker-entrypoint.sh"]
+
 USER 1997
 
 ENTRYPOINT ["docker-entrypoint.sh"]
