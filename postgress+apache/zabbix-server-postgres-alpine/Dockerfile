@@ -95,6 +95,7 @@ RUN set -eux && \
     cat database/postgresql/images.sql >> database/postgresql/create.sql && \
     cat database/postgresql/data.sql >> database/postgresql/create.sql && \
     gzip -c database/postgresql/create.sql > /tmp/zabbix-output/server/database/postgresql/create.sql.gz && \
+    mkdir -p /usr/share/doc/zabbix-server-postgresql/ && \
     cp /tmp/zabbix-output/server/database/postgresql/create.sql.gz /usr/share/doc/zabbix-server-postgresql/create.sql.gz && \
     rm -rf database/postgresql/create.sql  && \
     cp -R /tmp/zabbix/database/postgresql/timescaledb/schema.sql /tmp/zabbix-output/server/database/postgresql/timescaledb.sql && \
