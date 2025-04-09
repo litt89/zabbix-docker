@@ -1,0 +1,9 @@
+html[color-scheme="dark"] div.dashboard-widget-calendar svg text
+{
+	fill: #fff
+}
+html[color-scheme="dark"] div.dashboard-widget-calendar svg path
+{
+	stroke: #2b2b2b;
+}
+

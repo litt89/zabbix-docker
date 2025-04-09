@@ -1,0 +1,27 @@
+{
+	"manifest_version": 2.0,
+	"id": "calendar",
+	"type": "widget",
+	"name": "Calendar",
+	"namespace": "Calendar",
+	"version": "1.0",
+	"author": "Zabbix SIA",
+	"description": "Displays D3 calendar.",
+	"url": "https://example.com",
+	"actions": {
+		"widget.calendar.view": {
+			"class": "WidgetView"
+		}
+	},
+	"widget": {
+		"size": {
+			"width": 8,
+			"height": 5
+		},
+		"js_class": "WidgetCalendar"
+	},
+	"assets": {
+		"css": ["widget.css"],
+		"js": ["class.widget.js"]
+	}
+}

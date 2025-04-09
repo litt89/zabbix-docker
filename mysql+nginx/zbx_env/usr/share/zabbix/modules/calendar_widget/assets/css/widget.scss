@@ -1,0 +1,30 @@
+div.dashboard-widget-calendar {
+	display: grid;
+	grid-template-rows: 1fr;
+	padding: 0;
+
+	.treemap {
+		display: grid;
+		align-items: center;
+		justify-items: center;
+
+		canvas {
+			background: white;
+		}
+	}
+
+	.description {
+		padding-bottom: 8px;
+		font-size: 1.750em;
+		line-height: 1.2;
+		text-align: center;
+	}
+}
+
+.dashboard-grid-widget-hidden-header {
+	div.dashboard-widget-calendar {
+		.treemap {
+			margin-top: 8px;
+		}
+	}
+}

@@ -1,4 +1,4 @@
-FROM alpine:3.18
+FROM alpine:3.20
 
 ARG ZBX_SOURCES=https://git.zabbix.com/scm/zbx/zabbix.git
 ARG ZBX_BRANCH=release/6.0
@@ -15,6 +15,7 @@ RUN apk add \
     libevent-dev \
     libssh-dev \
     sqlite-dev \
+    linux-headers \
     libmodbus-dev \
     libxml2-dev \
     mysql-dev \
@@ -55,7 +56,7 @@ RUN cd /tmp/ && \
             --enable-ipv6 \
             --enable-proxy \
             --enable-server \
-            --enable-webservice \
+#            --enable-webservice \
             --with-ldap \
             --with-libcurl \
             --with-libmodbus \
@@ -86,7 +87,7 @@ RUN cd /tmp/ && \
     strip /tmp/zabbix-branch/src/go/bin/zabbix_agent2 && \
     strip /tmp/zabbix-branch/src/zabbix_get/zabbix_get && \
     strip /tmp/zabbix-branch/src/zabbix_sender/zabbix_sender && \
-    strip /tmp/zabbix-branch/src/go/bin/zabbix_web_service && \
+ #   strip /tmp/zabbix-branch/src/go/bin/zabbix_web_service && \
     rm -rf $(go env GOCACHE)
 
 STOPSIGNAL SIGTERM
